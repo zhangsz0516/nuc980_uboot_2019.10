@@ -307,6 +307,12 @@ enum {
 	IH_COMP_COUNT,
 };
 
+#define IH_ENCRPT_NONE		0	/*  No	 Encryption Used	*/
+#define IH_ENCRPT_AES		1	/*  AES	 Encryption Used	*/
+
+#define IH_CHECKSUM_CRC32	0	/*  checksum by crc32		*/
+#define IH_CHECKSUM_SHA1	1	/*  checksum by SHA-1		*/
+
 #define LZ4F_MAGIC	0x184D2204	/* LZ4 Magic Number		*/
 #define IH_MAGIC	0x27051956	/* Image Magic Number		*/
 #define IH_NMLEN		32	/* Image Name Length		*/
