@@ -1,0 +1,4 @@
+make ARCH=arm CROSS_COMPILE=arm-none-eabi- distclean
+make ARCH=arm CROSS_COMPILE=arm-none-eabi- nuc980_iot_defconfig
+make ARCH=arm CROSS_COMPILE=arm-none-eabi- -j4
+

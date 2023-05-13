@@ -44,7 +44,7 @@ static inline unsigned long long tick_to_time(unsigned long long tick)
         return tick;
 }
 
-static inline unsigned long long usec_to_tick(unsigned long long usec)
+static inline unsigned long long nuc_usec_to_tick(unsigned long long usec)
 {   
         usec *= gd->arch.timer_rate_hz;
         do_div(usec, 1000000);
@@ -99,7 +99,7 @@ void __udelay(unsigned long usec)
         ulong tmo;
 
         start = get_ticks();            /* get current timestamp */
-        tmo = usec_to_tick(usec);       /* convert usecs to ticks */
+        tmo = nuc_usec_to_tick(usec);       /* convert usecs to ticks */
         while ((get_ticks() - start) < tmo)
                 ;                       /* loop till time has passed */
 }

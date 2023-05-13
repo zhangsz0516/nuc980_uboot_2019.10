@@ -1678,7 +1678,6 @@ config CMD_JPEG
 
 choice
 	prompt "JPEG decode output format"
-	default JPEG_OUT_RGB565
 	depends on CMD_JPEG
 	help
 	  This select the JPEG output format. Could be ether RGB888 or RGB565.
