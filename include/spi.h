@@ -30,6 +30,11 @@
 #define SPI_RX_SLOW	BIT(11)			/* receive with 1 wire slow */
 #define SPI_RX_DUAL	BIT(12)			/* receive with 2 wires */
 #define SPI_RX_QUAD	BIT(13)			/* receive with 4 wires */
+#define SPI_6WIRE	0x10			/* SI/SO signals shared */
+
+/* SPI bus connection options - see enum spi_dual_flash */
+#define SPI_CONN_DUAL_SHARED		(1 << 0)
+#define SPI_CONN_DUAL_SEPARATED	(1 << 1)
 
 /* Header byte that marks the start of the message */
 #define SPI_PREAMBLE_END_BYTE	0xec
@@ -108,6 +113,8 @@ struct spi_slave {
 	unsigned int max_read_size;
 	unsigned int max_write_size;
 	void *memory_map;
+	u8 option;
+	bool quad_enable;
 
 	u8 flags;
 #define SPI_XFER_BEGIN		BIT(0)	/* Assert CS before transfer */
@@ -115,6 +122,7 @@ struct spi_slave {
 #define SPI_XFER_ONCE		(SPI_XFER_BEGIN | SPI_XFER_END)
 #define SPI_XFER_MMAP		BIT(2)	/* Memory Mapped start */
 #define SPI_XFER_MMAP_END	BIT(3)	/* Memory Mapped End */
+#define SPI_XFER_U_PAGE		BIT(4)
 };
 
 /**
