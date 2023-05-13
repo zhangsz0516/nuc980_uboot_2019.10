@@ -54,6 +54,11 @@ config RTC_DS1307
 	  Support for Dallas Semiconductor (now Maxim) DS1307 and DS1338/9 and
 	  compatible Real Time Clock devices.
 
+config RTC_NUC970
+       select CMD_DATE
+       bool "NUC970/N9H30 RTC support"
+       depends on NUC970
+
 config RTC_ISL1208
 	bool "Enable ISL1208 driver"
 	depends on DM_RTC

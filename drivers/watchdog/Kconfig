@@ -128,6 +128,14 @@ config WDT_ORION
 	   Select this to enable Orion watchdog timer, which can be found on some
 	   Marvell Armada chips.
 
+config NUC970_WATCHDOG
+	bool "NUC970/N9H30 Watchdog"
+	depends on NUC970
+
+config NUC980_WATCHDOG
+	bool "NUC980 Watchdog"
+	depends on NUC980
+
 config WDT_SANDBOX
 	bool "Enable Watchdog Timer support for Sandbox"
 	depends on SANDBOX && WDT

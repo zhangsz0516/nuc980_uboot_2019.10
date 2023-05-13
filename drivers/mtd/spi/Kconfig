@@ -154,6 +154,71 @@ config SPI_FLASH_XMC
 
 endif
 
+config SPI_FLASH_W74M
+	bool "Winbond RPMC SPI flash support"
+	depends on SPI_FLASH_WINBOND
+	help
+	  Add support for various Winbond RPMC SPI flash chips (W74xx)
+
+config RPMC_KEY_INDEX
+	int "Specify Key Index"
+	range 1 4
+	default 1
+	depends on SPI_FLASH_W74M
+	help
+	  Specify the key index
+
+config RPMC_ROOTKEY_TAG
+	string "Specify Rootkey Tag"
+	default "Nuvoton"
+	depends on SPI_FLASH_W74M
+	help
+	  Specify 32 characters input tag for creating rootkey.
+
+config SPI_FLASH_XTX
+	bool "XTX SPI flash support"
+	help
+	  Add support for various XTX SPI flash chips (XTxxx)
+
+config SPI_NAND
+	bool "SPI NAND flash support"
+
+choice
+        prompt "Select SPI NAND Flash"
+        default SPI_NAND_WINBOND
+        depends on SPI_NAND
+        help
+          This option selects SPI NAND Flash.
+
+config SPI_NAND_WINBOND
+	bool "Winbond SPI NAND flash support"
+
+config SPI_NAND_MACRONIX
+	bool "MACRONIX SPI NAND flash support"
+
+config SPI_NAND_XTX
+	bool "XTX SPI NAND flash support"
+
+config SPI_NAND_MK
+	bool "MK Founder SPI NAND flash support"
+
+config SPI_NAND_ATO
+	bool "ATO SPI NAND flash support"
+
+config SPI_NAND_MICRON
+	bool "MICRON SPI NAND flash support"
+
+config SPI_NAND_GD
+	bool "GigaDevice SPI NAND flash support"
+
+endchoice
+
+config WINBOND_MULTIDIE
+	bool "Winbond Multi-die SPI NAND flash support"
+	help
+	  Add support for Winbond Multi-die SPI NAND flash
+	  For instance, W25N02G
+
 config SPI_FLASH_USE_4K_SECTORS
 	bool "Use small 4096 B erase sectors"
 	depends on SPI_FLASH
