@@ -515,6 +515,43 @@ config ARCH_MVEBU
 	select SPI
 	imply CMD_DM
 
+config TARGET_NUC970
+	bool "Support nuc970/n9h30"
+	select CPU_ARM926EJS
+	select SUPPORT_SPL
+
+config TARGET_NUC970_TOMATO
+	bool "Support nuc970 tomato"
+	select CPU_ARM926EJS
+
+config TARGET_NUC970_ETH2UART
+	bool "Support nuc970 Eth2UART"
+	select CPU_ARM926EJS
+
+config TARGET_NUC980
+	bool "Support NUC980"
+	select CPU_ARM926EJS
+	select SUPPORT_SPL
+
+config TARGET_NUC980_ETH2UART
+	bool "Support NUC980 Eth2UART"
+	select CPU_ARM926EJS
+	select SUPPORT_SPL
+
+config TARGET_NUC980_IOT
+	bool "Support NUC980 IoT"
+	select CPU_ARM926EJS
+	select SUPPORT_SPL
+
+config TARGET_NUC980_LORAG
+	bool "Support NUC980 LORAG"
+	select CPU_ARM926EJS
+	select SUPPORT_SPL
+
+config TARGET_NUC980_CHILI
+	bool "Support NUC980 CHILI"
+	select CPU_ARM926EJS
+
 config TARGET_APF27
 	bool "Support apf27"
 	select CPU_ARM926EJS
@@ -1794,6 +1831,8 @@ source "board/hisilicon/hikey/Kconfig"
 source "board/hisilicon/hikey960/Kconfig"
 source "board/hisilicon/poplar/Kconfig"
 source "board/isee/igep003x/Kconfig"
+source "board/nuvoton/nuc970/Kconfig"
+source "board/nuvoton/nuc980/Kconfig"
 source "board/phytec/pcm051/Kconfig"
 source "board/silica/pengwyn/Kconfig"
 source "board/spear/spear300/Kconfig"

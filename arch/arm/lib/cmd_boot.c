@@ -20,6 +20,8 @@
 #include <common.h>
 #include <command.h>
 
+extern int NUC970_cleanup(void);
+
 /*
  * ARMv7M does not support ARM instruction mode. However, the
  * interworking BLX and BX instructions do encode the ARM/Thumb
@@ -36,6 +38,8 @@ unsigned long do_go_exec(ulong (*entry)(int, char * const []),
 {
 	ulong addr = (ulong)entry | 1;
 	entry = (void *)addr;
+
+	NUC970_cleanup();
 
 	return entry(argc, argv);
 }

@@ -16,6 +16,12 @@
 #include <command.h>
 #include <asm/system.h>
 
+#ifdef CONFIG_NUC970
+extern int NUC970_cleanup(void);
+#endif
+#ifdef CONFIG_NUC980
+extern int NUC980_cleanup(void);
+#endif
 static void cache_flush(void);
 
 int cleanup_before_linux (void)
@@ -26,6 +32,13 @@ int cleanup_before_linux (void)
 	 *
 	 * we turn off caches etc ...
 	 */
+
+#ifdef CONFIG_NUC970
+	NUC970_cleanup();
+#endif
+#ifdef CONFIG_NUC980
+	NUC980_cleanup();
+#endif
 
 	disable_interrupts ();
 
