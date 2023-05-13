@@ -222,6 +222,7 @@ int overwrite_console(void)
 }
 #endif
 
+#if 0
 void enable_caches(void)
 {
 #ifndef CONFIG_SYS_ICACHE_OFF
@@ -233,6 +234,7 @@ void enable_caches(void)
 
 	return;
 }
+#endif
 
 /* Enable reset debounce and set debounce counter to 0xFFF */
 static void enable_ResetDebounce(void)
@@ -264,7 +266,7 @@ int NUC980_cleanup(void)
 {
 
 #ifdef CONFIG_SYS_USE_SPIFLASH
-	spi_flash_reset();
+	//spi_flash_reset();
 #endif
 
 	//Reset multi-function pins to GPIO, except PG[15:11] while JTAGSEL(SYS_PWRON[4]) = 1, or PA[6:2] while JTAGSEL(SYS_PWRON[4]) = 0

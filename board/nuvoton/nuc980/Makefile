@@ -23,9 +23,9 @@ obj-y	+= string.o
 obj-y   += serial_nuc980.o
 obj-y   += serial.o
 obj-y   += nuc980_sysprintf.o
-obj-y   += vsprintf.o
+# obj-y   += vsprintf.o
 obj-y   += div64.o
-obj-y   += console.o
+# obj-y   += console.o
 else
 obj-y	:= nuc980.o
 obj-y	+= cmd_rtc_spare.o

@@ -596,7 +596,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 	 * timer_init() does not exist on PPC systems. The timer is initialized
 	 * and enabled (decrementer) in interrupt_init() here.
 	 */
-	timer_init();
+	//timer_init();
 #endif
 
 #if CONFIG_IS_ENABLED(BOARD_INIT)
@@ -617,7 +617,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 	spl_image.arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
 #endif
 	spl_image.boot_device = BOOT_DEVICE_NONE;
-	board_boot_order(spl_boot_list);
+	//board_boot_order(spl_boot_list);
 
 	if (boot_from_devices(&spl_image, spl_boot_list,
 			      ARRAY_SIZE(spl_boot_list))) {

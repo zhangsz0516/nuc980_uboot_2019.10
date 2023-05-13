@@ -15,7 +15,8 @@
 #include <serial.h>
 #include <stdio_dev.h>
 #include <exports.h>
-#include <environment.h>
+//#include <environment.h>
+#include <search.h>
 #include <watchdog.h>
 
 DECLARE_GLOBAL_DATA_PTR;

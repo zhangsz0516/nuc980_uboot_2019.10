@@ -28,7 +28,7 @@
 
 #define EXT_CLK	        12000000        /* 12 MHz crystal */
 
-#define CONFIG_SYS_TEXT_BASE		0xE00000
+//#define CONFIG_SYS_TEXT_BASE		0xE00000
 
 #define CONFIG_SYS_LOAD_ADDR            0xE00000
 
@@ -58,7 +58,7 @@
 /*#define CONFIG_BOOTDELAY	3*/
 
 #define CONFIG_SYS_SDRAM_BASE   0
-#define CONFIG_NR_DRAM_BANKS    2     /* there are 2 sdram banks for nuc980 */
+//#define CONFIG_NR_DRAM_BANKS    2     /* there are 2 sdram banks for nuc980 */
 #define CONFIG_SYS_INIT_SP_ADDR 0xBC004000
 
 #define CONFIG_BAUDRATE         115200
@@ -126,7 +126,7 @@
 
 #define CONFIG_SYS_NAND_U_BOOT_OFFS     0x100000   /* Offset to RAM U-Boot image */
 
-#define CONFIG_SPL_TEXT_BASE	0x200
+//#define CONFIG_SPL_TEXT_BASE	0x200
 #define CONFIG_SPL_STACK 	0xBC004000
 
 #define CONFIG_SPL_NAND_SIMPLE
@@ -165,7 +165,7 @@
 #define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + sizeof(CONFIG_SYS_PROMPT) + 16)
 #define CONFIG_SYS_LONGHELP		1
 #define CONFIG_CMDLINE_EDITING		1
-#define CONFIG_AUTO_COMPLETE
+//#define CONFIG_AUTO_COMPLETE
 #define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
 
 

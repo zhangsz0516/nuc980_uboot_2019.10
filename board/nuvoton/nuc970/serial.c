@@ -6,7 +6,7 @@
  */
 
 #include <common.h>
-#include <environment.h>
+//#include <environment.h>
 #include <serial.h>
 #include <stdio_dev.h>
 #include <post.h>

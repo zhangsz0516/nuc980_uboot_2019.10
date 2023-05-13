@@ -6,7 +6,8 @@
  */
 
 #include <common.h>
-#include <environment.h>
+//#include <environment.h>
+#include <search.h>
 #include <serial.h>
 #include <stdio_dev.h>
 #include <post.h>

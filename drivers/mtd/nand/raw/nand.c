@@ -88,8 +88,10 @@ static void nand_init_chip(int i)
 
 	nand->IO_ADDR_R = nand->IO_ADDR_W = (void  __iomem *)base_addr;
 
+#if 0
 	if (board_nand_init(nand))
 		return;
+#endif
 
 	if (nand_scan(mtd, maxchips))
 		return;
@@ -155,7 +157,7 @@ void nand_init(void)
 	initialized = 1;
 
 #ifdef CONFIG_SYS_NAND_SELF_INIT
-	board_nand_init();
+	//board_nand_init();
 #else
 	int i;
 
