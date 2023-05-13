@@ -66,6 +66,18 @@ static const image_header_t *image_get_ramdisk(ulong rd_addr, uint8_t arch,
 #define CONFIG_SYS_BARGSIZE 512
 #endif
 
+#ifdef CONFIG_NUC970_HW_CHECKSUM
+#include <nuc970_crypto.h>
+#endif
+
+#ifdef CONFIG_N9H30_HW_CHECKSUM
+#include <n9h30_crypto.h>
+#endif
+
+#ifdef CONFIG_NUC980_HW_CHECKSUM
+#include <nuc980_crypto.h>
+#endif
+
 static const table_entry_t uimage_arch[] = {
 	{	IH_ARCH_INVALID,	"invalid",	"Invalid ARCH",	},
 	{	IH_ARCH_ALPHA,		"alpha",	"Alpha",	},
@@ -190,6 +202,18 @@ static const table_entry_t uimage_comp[] = {
 	{	-1,		"",		"",			},
 };
 
+static const table_entry_t uimage_encrypt[] = {
+	{	IH_ENCRPT_NONE,	"none",		"unencrypted",		},
+	{	IH_ENCRPT_AES,	"aes",		"aes encrypt",		},
+	{	-1,		"",		"",			},
+};
+
+static const table_entry_t uimage_checksum[] = {
+	{	IH_CHECKSUM_CRC32,	"crc32",	"checksum by crc32",		},
+	{	IH_CHECKSUM_SHA1,	"sha1",		"checksum by sha1",		},
+	{	-1,		"",		"",			},
+};
+
 struct table_info {
 	const char *desc;
 	int count;
@@ -225,7 +249,39 @@ int image_check_dcrc(const image_header_t *hdr)
 {
 	ulong data = image_get_data(hdr);
 	ulong len = image_get_data_size(hdr);
+#if defined(CONFIG_NUC970_HW_CHECKSUM) || defined(CONFIG_NUC980_HW_CHECKSUM)
+	//use SHA-1
+        ulong dcrc;
+
+        *(volatile u32 *)REG_HCLKEN |= 0x800000; //Crypto clk
+        SECURE->IPSEC_INT_EN = SECURE_INT_EN_HMAC | SECURE_INT_EN_HMAC_ERR;
+        SECURE->HMAC_DMA_CNT = len;
+        SECURE->HMAC_SADR = (UINT32)data;
+        asm volatile("": : :"memory");
+        SECURE->HMAC_CTL |= SECURE_HMAC_IN_TRANSFORM | SECURE_HMAC_OUT_TRANSFORM | SECURE_HMAC_DMA_EN | SECURE_HMAC_LAST | SECURE_HMAC_START;
+
+        while (1) {
+                volatile unsigned int int_flag;
+                int_flag = (volatile unsigned int)(SECURE->IPSEC_INT_FLAG);
+                if (int_flag & SECURE_INT_FLAG_HMAC_DONE ) {
+                        SECURE->IPSEC_INT_FLAG = SECURE_INT_FLAG_HMAC_DONE;
+                        break;
+                }
+                else if (int_flag & SECURE_INT_FLAG_HMAC_ERR) {
+                        SECURE->IPSEC_INT_FLAG = SECURE_INT_FLAG_HMAC_ERR;
+                        break;
+                }
+        }
+
+        while ((volatile unsigned int)(SECURE->HMAC_FLAG) & SECURE_HMAC_BUSY);
+
+        dcrc = SECURE->HMAC_H0;
+
+        *(volatile u32 *)REG_HCLKEN &= ~0x800000; //Crypto clk
+
+#else	// software crc
 	ulong dcrc = crc32_wd(0, (unsigned char *)data, len, CHUNKSZ_CRC32);
+#endif
 
 	return (dcrc == image_get_dcrc(hdr));
 }
@@ -904,6 +960,16 @@ int genimg_get_type_id(const char *name)
 int genimg_get_comp_id(const char *name)
 {
 	return (get_table_entry_id(uimage_comp, "Compression", name));
+}
+
+int genimg_get_encrypt_id(const char *name)
+{
+	return (get_table_entry_id(uimage_encrypt, "Encryption", name));
+}
+
+int genimg_get_checksum_id(const char *name)
+{
+	return (get_table_entry_id(uimage_checksum, "Checksum", name));
 }
 
 #ifndef USE_HOSTCC

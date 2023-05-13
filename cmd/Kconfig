@@ -1198,6 +1198,11 @@ config DEFAULT_SPI_MODE
 	depends on CMD_SPI
 	default 0
 
+config CMD_DATE
+	bool "RTC"
+	help
+	  RTC support.
+
 config CMD_TSI148
 	bool "tsi148 - Command to access tsi148 device"
 	help
@@ -1664,6 +1669,27 @@ config CMD_QFW
 	  This provides access to the QEMU firmware interface.  The main
 	  feature is to allow easy loading of files passed to qemu-system
 	  via -kernel / -initrd
+
+config CMD_JPEG
+	bool "jpeg"
+	depends on NUC970_LCD
+	help
+	  JPEG decode command support
+
+choice
+	prompt "JPEG decode output format"
+	default JPEG_OUT_RGB565
+	depends on CMD_JPEG
+	help
+	  This select the JPEG output format. Could be ether RGB888 or RGB565.
+
+	config CMD_JPEG_RGB565
+        bool "RGB565"
+
+	config CMD_JPEG_RGB888
+        bool "RGB888"
+
+endchoice
 
 source "cmd/mvebu/Kconfig"
 

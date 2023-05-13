@@ -395,11 +395,17 @@ static int initr_flash(void)
 #endif
 
 #ifdef CONFIG_CMD_NAND
+#ifdef CONFIG_SPI_NAND
+int spi_nand_init(void);
+#endif
 /* go init the NAND */
 static int initr_nand(void)
 {
 	puts("NAND:  ");
 	nand_init();
+#ifdef CONFIG_SPI_NAND
+	spi_nand_init();
+#endif
 	printf("%lu MiB\n", nand_size() / 1024);
 	return 0;
 }

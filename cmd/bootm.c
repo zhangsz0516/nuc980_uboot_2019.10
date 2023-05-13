@@ -87,6 +87,10 @@ static int do_bootm_subcommand(cmd_tbl_t *cmdtp, int flag, int argc,
 /*******************************************************************/
 /* bootm - boot application image from image in memory */
 /*******************************************************************/
+#ifdef CONFIG_CMD_JPEG
+extern bool jpegIsStop(void);
+extern void JPEG_TRIGGER(void);
+#endif
 
 int do_bootm(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
@@ -102,6 +106,11 @@ int do_bootm(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 
 		relocated = 1;
 	}
+#endif
+
+#ifdef CONFIG_CMD_JPEG
+	while(!jpegIsStop())
+		JPEG_TRIGGER();
 #endif
 
 	/* determine if we have a sub command */
