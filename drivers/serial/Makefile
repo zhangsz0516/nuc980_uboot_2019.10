@@ -71,4 +71,6 @@ obj-$(CONFIG_SIFIVE_SERIAL) += serial_sifive.o
 
 ifndef CONFIG_SPL_BUILD
 obj-$(CONFIG_USB_TTY) += usbtty.o
+obj-$(CONFIG_NUC970_CONSOLE) += serial_nuc970.o
+obj-$(CONFIG_NUC980_CONSOLE) += serial_nuc980.o
 endif

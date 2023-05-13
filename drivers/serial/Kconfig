@@ -808,4 +808,12 @@ config SYS_SDMR
 	depends on MPC8XX_CONS
 	default 0
 
+config NUC970_CONSOLE
+	bool "NUC970/N9H30 serial port support"
+	depends on NUC970
+
+config NUC980_CONSOLE
+	bool "NUC980 serial port support"
+	depends on NUC980
+
 endmenu

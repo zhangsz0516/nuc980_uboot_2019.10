@@ -62,6 +62,8 @@ obj-$(CONFIG_VIDEO_SIMPLE) += simplefb.o
 obj-$(CONFIG_VIDEO_TEGRA20) += tegra.o
 obj-$(CONFIG_VIDEO_VCXK) += bus_vcxk.o
 obj-$(CONFIG_VIDEO_VESA) += vesa.o
+obj-$(CONFIG_NUC970_LCD) += nuc970_fb.o
+obj-$(CONFIG_NUC977_LCD) += nuc970_fb.o
 
 obj-y += bridge/
 obj-y += sunxi/
