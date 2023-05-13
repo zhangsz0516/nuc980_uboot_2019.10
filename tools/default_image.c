@@ -87,6 +87,7 @@ static int image_verify_header(unsigned char *ptr, int image_size,
 static void image_set_header(void *ptr, struct stat *sbuf, int ifd,
 				struct image_tool_params *params)
 {
+	unsigned char sha1_output[20];
 	uint32_t checksum;
 	time_t time;
 	uint32_t imagesize;
@@ -95,10 +96,16 @@ static void image_set_header(void *ptr, struct stat *sbuf, int ifd,
 
 	image_header_t * hdr = (image_header_t *)ptr;
 
-	checksum = crc32(0,
-			(const unsigned char *)(ptr +
-				sizeof(image_header_t)),
-			sbuf->st_size - sizeof(image_header_t));
+	// CWWeng 2015/3/5 add SHA-1 library for hardware checksum
+	if (params->checksum == IH_CHECKSUM_SHA1) {
+		sha1_csum((const unsigned char *)(ptr + sizeof(image_header_t)), sbuf->st_size - sizeof(image_header_t), sha1_output);
+		checksum = sha1_output[0] + (sha1_output[1] << 8) + (sha1_output[2] << 16) + (sha1_output[3] << 24);
+	} else {
+		checksum = crc32(0,
+				(const unsigned char *)(ptr +
+					sizeof(image_header_t)),
+				sbuf->st_size - sizeof(image_header_t));
+	}
 
 	time = imagetool_get_source_date(params->cmdname, sbuf->st_mtime);
 	ep = params->ep;
