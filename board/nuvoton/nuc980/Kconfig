@@ -20,6 +20,10 @@ config NUC980
 	bool
 	default y
 
+config SYS_USE_SPIFLASH
+    bool "use spi flash"
+    default y
+
 config NUC980_HW_CHECKSUM
 	bool
 	default y if TARGET_NUC980_TOMATO
