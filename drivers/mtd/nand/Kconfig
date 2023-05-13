@@ -1,6 +1,14 @@
 config MTD_NAND_CORE
 	tristate
 
+config NAND_NUC970
+	bool "NUC970/N9H30 NAND support"
+	depends on NUC970
+
+config NAND_NUC980
+	bool "NUC980 NAND support"
+	depends on NUC980
+
 source "drivers/mtd/nand/raw/Kconfig"
 
 source "drivers/mtd/nand/spi/Kconfig"

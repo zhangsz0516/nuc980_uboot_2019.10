@@ -39,4 +39,7 @@ obj-$(CONFIG_SYS_I2C_VERSATILE) += i2c-versatile.o
 obj-$(CONFIG_SYS_I2C_XILINX_XIIC) += xilinx_xiic.o
 obj-$(CONFIG_TEGRA186_BPMP_I2C) += tegra186_bpmp_i2c.o
 
+obj-$(CONFIG_NUC970_I2C) += nuc970_i2c.o
+obj-$(CONFIG_NUC980_I2C) += nuc980_i2c.o
+
 obj-$(CONFIG_I2C_MUX) += muxes/

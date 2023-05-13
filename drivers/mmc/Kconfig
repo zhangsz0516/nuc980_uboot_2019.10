@@ -381,6 +381,38 @@ config MMC_SANDBOX
 	  improves build coverage for sandbox and makes it easier to detect
 	  MMC build errors with sandbox.
 
+config NUC970_MMC
+	bool "NUC970/N9H30 MMC support"
+	depends on NUC970
+
+config GENERIC_MMC
+	bool "Generic MMC support"
+	depends on NUC970_MMC || NUC980_MMC
+
+config NUC970_SD_PORT0
+	bool "NUC970/N9H30 SD port 0 support"
+	depends on NUC970_MMC
+
+config NUC970_SD_PORT1
+	bool "NUC970/N9H30 SD port 1 support"
+	depends on NUC970_MMC
+
+config NUC970_EMMC
+	bool "NUC970/N9H30 EMMC support"
+	depends on NUC970_MMC
+
+config NUC980_MMC
+	bool "NUC980 MMC support"
+	depends on NUC980
+
+config NUC980_SD_PORT0
+	bool "NUC980 SD1 support (SD Host Port F)"
+	depends on NUC980_MMC
+
+config NUC980_EMMC
+	bool "NUC980 SD0 support (FMI Port C)"
+	depends on NUC980_MMC
+
 config MMC_SDHCI
 	bool "Secure Digital Host Controller Interface support"
 	help

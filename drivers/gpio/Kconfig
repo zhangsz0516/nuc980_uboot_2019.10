@@ -383,4 +383,10 @@ config MT7621_GPIO
 	help
 	  Say yes here to support MediaTek MT7621 compatible GPIOs.
 
+config NUC980_GPIO
+	bool "NUC980 GPIO driver"
+	depends on NUC980
+	help
+	  Support for the NUC980 GPIO driver.
+
 endmenu

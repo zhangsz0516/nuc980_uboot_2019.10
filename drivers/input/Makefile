@@ -15,3 +15,4 @@ obj-$(CONFIG_TEGRA_KEYBOARD) += tegra-kbc.o
 obj-$(CONFIG_TWL4030_INPUT) += twl4030.o
 obj-$(CONFIG_TWL6030_INPUT) += twl6030.o
 endif
+obj-$(CONFIG_KPI_NUC970) += nuc970_keypad.o
